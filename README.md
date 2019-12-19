@@ -34,12 +34,26 @@ Querying with `fl=` for `spayload(currencyPayload,store3)` would generate a resp
   }
 }     
 ```
-
 And executing `spayload(payloadCurrency,store2)` returns `EUR`, and so on.
 
 You can use `spayload` even as sorting function.
 
    sort=spayload(payloadField,value) asc
+
+Querying with `fl=` for `payload(pricePayload,store3)` would generate a response like the following:
+
+```
+{
+  "response":{
+    "docs":[
+      {
+        "id":"my sample doc",
+        "payload(pricePayload,store3)":"1.3"
+      }
+    ]
+  }
+}     
+```
 
 ## Why?
 
@@ -66,7 +80,8 @@ Building requires JDK 8 and Maven.  Once you're setup just run:
 - add these lines in your `solrconfig.xml`:
 
 ```
-<lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-payload-string-function-query-\d.*\.jar" />
-<lib dir="${solr.solr.home}/lib/" regex="solr-payload-string-function-query-\d.*\.jar" />
-<valueSourceParser name="spayload" class="it.damore.solrlegacy.payload.PayloadStringValueSourceParser" />
+  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-payload-legacy-function-query-\d.*\.jar" />
+  <lib dir="${solr.solr.home}/lib/" regex="solr-payload-legacy-function-query-\d.*\.jar" />
+  <valueSourceParser name="spayload" class="it.damore.solrlegacy.payload.PayloadStringValueSourceParser" />
+  <valueSourceParser name="payload" class="it.damore.solrlegacy.payload.PayloadFloatValueSourceParser" />
 ```
