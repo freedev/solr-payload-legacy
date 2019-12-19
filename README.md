@@ -55,7 +55,7 @@ Querying with `fl=` for `payload(pricePayload,store3)` would generate a response
 }     
 ```
 
-## Why[Punctation: ?]
+## Why[Punctation: '?']
 
 I started to use payloads because I had the classical per-store pricing problem.
 Thousands of stores across the world and different prices for each store.
