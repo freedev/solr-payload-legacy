@@ -1,4 +1,4 @@
-# Solr Payload Float/Integer/String Custom Function Query
+# Solr Payload Legacy Custom Function Query
 
 This is a backport of payloads function queries to Solr 5.x, aka versions before standard payload implementation.
 
