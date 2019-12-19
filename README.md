@@ -76,7 +76,45 @@ Building requires JDK 8 and Maven.  Once you're setup just run:
 
 ## Usage - Configuration steps
 
-- copy the `solr-payload-string-function-query.jar` into your solr_home/dist directory 
+- copy the `solr-payload-legacy-function-query-1.0.jar` into your solr_home/dist directory 
+
+- add these lines in your `schema.xml`:
+
+```
+    <!-- fields from above example -->
+    <field name="currencyPayload" type="delimited_payloads_string" indexed="true" stored="true" multiValued="true" />
+    <field name="pricePayload" type="delimited_payloads_float" indexed="true" stored="true" multiValued="true" />
+
+    <!-- payloaded dynamic fields -->
+    <dynamicField name="*_dpf" type="delimited_payloads_float" indexed="true"  stored="true"/>
+    <dynamicField name="*_dpi" type="delimited_payloads_int" indexed="true"  stored="true"/>
+    <dynamicField name="*_dps" type="delimited_payloads_string" indexed="true"  stored="true"/>
+
+    <dynamicField name="*_dpff" type="delimited_payloads_float" indexed="true"  stored="true" multiValued="true"/>
+    <dynamicField name="*_dpii" type="delimited_payloads_int" indexed="true"  stored="true" multiValued="true"/>
+    <dynamicField name="*_dpss" type="delimited_payloads_string" indexed="true"  stored="true" multiValued="true"/>
+
+    <!-- Payloaded field types -->
+    <fieldType name="delimited_payloads_float" stored="false" indexed="true" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="float"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="delimited_payloads_int" stored="false" indexed="true" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="integer"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="delimited_payloads_string" stored="false" indexed="true" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="identity"/>
+      </analyzer>
+    </fieldType>
+```
+
 - add these lines in your `solrconfig.xml`:
 
 ```
