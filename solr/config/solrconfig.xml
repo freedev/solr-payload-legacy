@@ -1782,8 +1782,8 @@
   </admin>
 
   <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-payload-legacy-function-query-\d.*\.jar" />
-<lib dir="${solr.solr.home}/lib/" regex="solr-payload-legacy-function-query-\d.*\.jar" />
-<valueSourceParser name="spayload" class="it.damore.solrlegacy.payload.PayloadStringValueSourceParser" />
-<valueSourceParser name="payload" class="it.damore.solrlegacy.payload.PayloadFloatValueSourceParser" />
+  <lib dir="${solr.solr.home}/lib/" regex="solr-payload-legacy-function-query-\d.*\.jar" />
+  <valueSourceParser name="spayload" class="it.damore.solrlegacy.payload.PayloadStringValueSourceParser" />
+  <valueSourceParser name="payload" class="it.damore.solrlegacy.payload.PayloadFloatValueSourceParser" />
 
 </config>
